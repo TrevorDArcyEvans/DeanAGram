@@ -27,6 +27,7 @@ public sealed class Utils_Tests
   [TestCase("abc", "abcde")]
   [TestCase("zxvnmjkl", "abcde")]
   [TestCase("ab", "ababa")]
+  [TestCase("abzzzzzz", "ababa")]
   public void ContainsWord_not_contains_returns_false(string anagram, string word)
   {
     anagram.ContainsWord(word).ShouldBeFalse();
