@@ -29,7 +29,7 @@ public sealed class WordList_Tests
   }
 
   [Test]
-  public void Contains_returns_false()
+  public void Contains_not_contains_returns_false()
   {
     var words = new WordList { "edcba", "edcbaedcba" };
 
@@ -37,7 +37,7 @@ public sealed class WordList_Tests
   }
 
   [Test]
-  public void Contains_returns_true()
+  public void Contains_contains_returns_true()
   {
     const string word1 = "edcba";
     const string word2 = "edcbaedcba";
@@ -49,7 +49,7 @@ public sealed class WordList_Tests
   }
 
   [Test]
-  public void GetCandidates_contains_returns_expected()
+  public void GetCandidates_contains_returns_true()
   {
     const string word1 = "edcba";
     const string word2 = "ba";
@@ -64,7 +64,7 @@ public sealed class WordList_Tests
   }
 
   [Test]
-  public void GetCandidates_not_contains_returns_expected()
+  public void GetCandidates_not_contains_returns_false()
   {
     const string word1 = "edcba";
     const string word2 = "ba";
