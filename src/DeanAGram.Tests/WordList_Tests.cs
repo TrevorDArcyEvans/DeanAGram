@@ -68,7 +68,7 @@ public sealed class WordList_Tests
   {
     const string word1 = "edcba";
     const string word2 = "ba";
-    const string word3 = "dcb";
+    const string word3 = "zzz";
     const string anagram = "zxvnmjkl";
     
     var words = new WordList { word1, word2, word3 };

@@ -46,6 +46,6 @@ public sealed class WordList : Dictionary<string, HashSet<string>>
       retVal.UnionWith(thisCandidates);
     }
 
-    return retVal;
+    return retVal.Where(anagram.Contains).ToHashSet();
   }
 }
