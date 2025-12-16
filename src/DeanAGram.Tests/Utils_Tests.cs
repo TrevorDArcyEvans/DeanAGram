@@ -31,4 +31,20 @@ public sealed class Utils_Tests
   {
     anagram.ContainsWord(word).ShouldBeFalse();
   }
+
+  [TestCase("edcba", "abcde", "")]
+  [TestCase("edcbaedcba", "abcde", "edcba")]
+  [TestCase("ababa", "ab", "aba")]
+  public void GetRemainder_contains_returns_expected(string anagram, string word, string remainder)
+  {
+    anagram.GetRemainder(word).ShouldBe(remainder);
+  }
+
+  [TestCase("edcba", "abfg")]
+  [TestCase("abcde", "z")]
+  [TestCase("ab", "ababa")]
+  public void GetRemainder_not_contains_throws(string anagram, string word)
+  {
+    Should.Throw<KeyNotFoundException>(() => anagram.GetRemainder(word));
+  }
 }

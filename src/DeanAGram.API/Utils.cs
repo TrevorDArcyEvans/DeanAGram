@@ -37,6 +37,22 @@ public static class Utils
     return true;
   }
 
+  public static string GetRemainder(this string anagram, string word)
+  {
+    var aChars = anagram.ToCharArray().ToList();
+    var wChars = word.ToCharArray();
+
+    foreach (var wChar in wChars)
+    {
+      if (!aChars.Remove(wChar))
+      {
+        throw new KeyNotFoundException();
+      }
+    }
+
+    return new string(aChars.ToArray());
+  }
+
   private static IDictionary<char, int> GetCharacterCounts(string anagram)
   {
     return anagram
