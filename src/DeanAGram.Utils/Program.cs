@@ -3,6 +3,7 @@
 using CommandLine;
 using DeanAGram.API;
 using Newtonsoft.Json;
+using StringSanitizer.StringSanitizer;
 
 internal static class Program
 {
@@ -16,7 +17,11 @@ internal static class Program
   private static async Task Run(Options opt)
   {
     var wordList = new WordList();
-    var words = File.ReadAllLines(opt.WordFile1Path).Select(x => x.ToLowerInvariant());
+    var words = (await File.ReadAllLinesAsync(opt.WordFile1Path))
+      .Select(x => x
+        .ToLowerInvariant()
+        .SanitizeNonAlphanumeric()
+        .SanitizeNumeric());
     foreach (var word in words)
     {
       wordList.Add(word);
