@@ -1,11 +1,11 @@
 namespace DeanAGram.API;
 
-public sealed class Solver(WordList wordList)
+public sealed class Solver(WordList _wordList)
 {
-  private readonly WordList _wordList = wordList;
-
   public IEnumerable<string> GetSolutions(string anagram)
   {
-    return Enumerable.Empty<string>();
+    var candidates = _wordList.GetCandidates(anagram);
+
+    return candidates;
   }
 }

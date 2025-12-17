@@ -1,6 +1,7 @@
-using DeanAGram.API;
-
 namespace DeanAGram.Tests;
+
+using DeanAGram.API;
+using Shouldly;
 
 [TestFixture]
 public sealed class Solver_Tests
@@ -9,5 +10,21 @@ public sealed class Solver_Tests
   public void Constructor_succeeds()
   {
     _ = new Solver(new());
+  }
+
+  [Test]
+  public void GetSolutions_01_succeeds()
+  {
+    var wordList = new WordList();
+    wordList.Add("salve");
+    wordList.Add("smoked");
+    wordList.Add("salmon");
+    wordList.Add("swirl");
+    var sut = new Solver(wordList);
+
+    var result = sut.GetSolutions("salmonsmoked");
+
+    result.ShouldContain("smoked");
+    result.ShouldContain("salmon");
   }
 }
