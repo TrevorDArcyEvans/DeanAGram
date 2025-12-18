@@ -53,6 +53,16 @@ public static class Utils
     return new string(aChars.ToArray());
   }
 
+  // Source - https://stackoverflow.com/a
+  // Posted by Henk J Meulekamp, modified by community. See post 'Timeline' for change history
+  // Retrieved 2025-12-17, License - CC BY-SA 4.0
+  public static string RemoveWhitespace(this string input)
+  {
+    return new string(input
+      .Where(c => !Char.IsWhiteSpace(c))
+      .ToArray());
+  }
+
   private static IDictionary<char, int> GetCharacterCounts(string anagram)
   {
     return anagram
