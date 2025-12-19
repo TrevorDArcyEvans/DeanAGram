@@ -24,6 +24,7 @@ public sealed class Solver_Tests
 
     var result = sut.GetSolutions("salmon smoked".RemoveWhitespace());
 
+    result.Count().ShouldBe(2);
     result.ShouldContain("smoked");
     result.ShouldContain("salmon");
   }
