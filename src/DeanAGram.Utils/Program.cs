@@ -1,4 +1,6 @@
-﻿namespace DeanAGram.Utils;
+﻿using System.Diagnostics;
+
+namespace DeanAGram.Utils;
 
 using CommandLine;
 using DeanAGram.API;
@@ -16,6 +18,10 @@ internal static class Program
 
   private static async Task Run(Options opt)
   {
+    Console.WriteLine($"Processing:  {opt.WordFile1Path}");
+
+    var sw = Stopwatch.StartNew();
+
     var wordList = new WordList();
     var words = (await File.ReadAllLinesAsync(opt.WordFile1Path))
       .Select(x => x
@@ -30,6 +36,10 @@ internal static class Program
     var json = JsonConvert.SerializeObject(wordList, Formatting.Indented);
     var jsonWordListFilePath = Path.ChangeExtension(opt.WordFile1Path, "json");
     await File.WriteAllTextAsync(jsonWordListFilePath, json);
+
+    var elapsedMs = sw.ElapsedMilliseconds;
+
+    Console.WriteLine($"  --> {jsonWordListFilePath} in {elapsedMs} ms");
   }
 
   private static Task HandleParseError(IEnumerable<Error> errs)
