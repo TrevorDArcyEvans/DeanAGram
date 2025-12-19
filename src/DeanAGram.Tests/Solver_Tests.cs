@@ -22,7 +22,7 @@ public sealed class Solver_Tests
     wordList.Add("swirl");
     var sut = new Solver(wordList);
 
-    var result = sut.GetSolutions("salmonsmoked");
+    var result = sut.GetSolutions("salmon smoked".RemoveWhitespace());
 
     result.ShouldContain("smoked");
     result.ShouldContain("salmon");
