@@ -37,6 +37,7 @@ public sealed class Utils_Tests
   [TestCase("edcba", "abcde", "")]
   [TestCase("edcbaedcba", "abcde", "edcba")]
   [TestCase("ababa", "ab", "aba")]
+  [TestCase("ab", "ab", "")]
   public void GetRemainder_contains_returns_expected(string anagram, string word, string remainder)
   {
     anagram.GetRemainder(word).ShouldBe(remainder);
