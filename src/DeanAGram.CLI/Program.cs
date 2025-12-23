@@ -1,39 +1,58 @@
 ﻿namespace DeanAGram.CLI;
 
+using System.Diagnostics;
 using CommandLine;
 using DeanAGram.API;
 
 internal static class Program
 {
-  public static async Task Main(string[] args)
+  public static void Main(string[] args)
   {
-    var result = await Parser.Default.ParseArguments<Options>(args)
-      .WithParsedAsync(Run);
-    await result.WithNotParsedAsync(HandleParseError);
+    var result = Parser.Default.ParseArguments<Options>(args)
+      .WithParsed(Run);
+    result.WithNotParsed(HandleParseError);
   }
 
-  private static async Task Run(Options opt)
+  private static void Run(Options opt)
   {
-    var json = await File.ReadAllTextAsync(opt.JsonWordFilePath);
+    var sw = Stopwatch.StartNew();
+
     var wordList = WordList.FromJsonWordFile(opt.JsonWordFilePath);
+    var solver = new Solver(wordList);
+    var solns = solver.GetSolutions(opt.Anagram);
+    var elapsedMs = sw.ElapsedMilliseconds;
+
+    Console.WriteLine($"Processing:");
+    Console.WriteLine($"  {opt.JsonWordFilePath}");
+    Console.WriteLine($"  {opt.Anagram}");
+    Console.WriteLine($"in {elapsedMs} ms");
+    Console.WriteLine();
+    foreach (var soln in solns)
+    {
+      foreach (var word in soln)
+      {
+        Console.Write($"{word} ");
+      }
+
+      Console.WriteLine();
+    }
   }
 
-  private static Task HandleParseError(IEnumerable<Error> errs)
+  private static void HandleParseError(IEnumerable<Error> errs)
   {
     if (errs.IsVersion())
     {
       Console.WriteLine("Version Request");
-      return Task.CompletedTask;
+      return;
     }
 
     if (errs.IsHelp())
     {
       Console.WriteLine("Help Request");
-      return Task.CompletedTask;
-      ;
+      return;
     }
 
     Console.WriteLine("Parser Fail");
-    return Task.CompletedTask;
+    return;
   }
 }
