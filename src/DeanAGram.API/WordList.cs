@@ -1,9 +1,17 @@
 namespace DeanAGram.API;
 
+using Newtonsoft.Json;
+
 // [fast key] --> [words[]]
 // fast key = unique letters in a word
 public sealed class WordList : Dictionary<string, HashSet<string>>
 {
+  public static WordList FromJsonWordFile(string jsonWordFilePath)
+  {
+    var json = File.ReadAllText(jsonWordFilePath);
+    return JsonConvert.DeserializeObject<WordList>(json);
+  }
+
   public void Add(string word)
   {
     var fkey = word.FastKey();

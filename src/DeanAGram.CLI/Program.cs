@@ -2,7 +2,6 @@
 
 using CommandLine;
 using DeanAGram.API;
-using Newtonsoft.Json;
 
 internal static class Program
 {
@@ -15,8 +14,8 @@ internal static class Program
 
   private static async Task Run(Options opt)
   {
-    var json = await File.ReadAllTextAsync(opt.JsonWordFile1Path);
-    var wordList = JsonConvert.DeserializeObject<WordList>(json);
+    var json = await File.ReadAllTextAsync(opt.JsonWordFilePath);
+    var wordList = WordList.FromJsonWordFile(opt.JsonWordFilePath);
   }
 
   private static Task HandleParseError(IEnumerable<Error> errs)
