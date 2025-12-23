@@ -34,8 +34,15 @@ public sealed class WordList : Dictionary<string, HashSet<string>>
     return ContainsKey(fkey) && this[fkey].Contains(word);
   }
 
+  private readonly IDictionary<string, HashSet<string>> _candidates = new Dictionary<string, HashSet<string>>();
+
   public HashSet<string> GetCandidates(string anagram)
   {
+    if (_candidates.ContainsKey(anagram))
+    {
+      return _candidates[anagram];
+    }
+
     var retVal = new HashSet<string>();
 
     foreach (var key in Keys)
@@ -50,6 +57,8 @@ public sealed class WordList : Dictionary<string, HashSet<string>>
         }
       }
     }
+
+    _candidates.Add(anagram, retVal);
 
     return retVal;
   }
