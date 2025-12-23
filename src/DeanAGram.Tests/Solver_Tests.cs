@@ -24,8 +24,27 @@ public sealed class Solver_Tests
 
     var result = sut.GetSolutions("salmon smoked".RemoveWhitespace());
 
-    result.Count().ShouldBe(2);
-    result.ShouldContain("smoked");
-    result.ShouldContain("salmon");
+    result.Count().ShouldBe(1);
+    var res = result.Single();
+    res.ShouldContain("smoked");
+    res.ShouldContain("salmon");
+  }
+
+  [Test]
+  public void GetSolutions_02_succeeds()
+  {
+    var wordList = new WordList();
+    wordList.Add("brake");
+    wordList.Add("rake");
+    wordList.Add("flake");
+    wordList.Add("lake");
+    var sut = new Solver(wordList);
+
+    var result = sut.GetSolutions("lake rake".RemoveWhitespace());
+
+    result.Count().ShouldBe(1);
+    var res = result.Single();
+    res.ShouldContain("lake");
+    res.ShouldContain("rake");
   }
 }
