@@ -63,11 +63,22 @@ public static class Utils
       .ToArray());
   }
 
+  private static readonly IDictionary<string, IDictionary<char, int>> _wordCharCounts = new Dictionary<string, IDictionary<char, int>>();
+
   private static IDictionary<char, int> GetCharacterCounts(string anagram)
   {
-    return anagram
+    if (_wordCharCounts.ContainsKey(anagram))
+    {
+      return _wordCharCounts[anagram];
+    }
+
+    var newCharCount = anagram
       .GroupBy(c => c)
       .Select(c => new { Char = c.Key, Count = c.Count() })
       .ToDictionary(x => x.Char, x => x.Count);
+
+    _wordCharCounts[anagram] = newCharCount;
+
+    return newCharCount;
   }
 }
