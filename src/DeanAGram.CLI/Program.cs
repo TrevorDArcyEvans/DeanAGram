@@ -24,11 +24,11 @@ internal static class Program
 
     Console.WriteLine($"Processing:");
     Console.WriteLine($"  {opt.JsonWordFilePath}");
-    Console.WriteLine($"  {opt.Anagram}");
-    Console.WriteLine($"in {elapsedMs} ms");
+    Console.WriteLine($"  \"{opt.Anagram}\"");
     Console.WriteLine();
     foreach (var soln in solns)
     {
+      Console.Write($"  ");
       foreach (var word in soln)
       {
         Console.Write($"{word} ");
@@ -36,6 +36,8 @@ internal static class Program
 
       Console.WriteLine();
     }
+
+    Console.WriteLine($"Found {solns.Count()} solutions in {elapsedMs} ms");
   }
 
   private static void HandleParseError(IEnumerable<Error> errs)
