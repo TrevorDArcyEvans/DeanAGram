@@ -18,7 +18,7 @@ public sealed class Solver(WordList _wordList)
       soln.Sort();
     }
 
-    var dupeList = new List<List<string>>();
+    var dupeList = new HashSet<List<string>>();
     for (var i = 0; i < retval.Count - 1; i++)
     {
       for (var j = i + 1; j < retval.Count; j++)
