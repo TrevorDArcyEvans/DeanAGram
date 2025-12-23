@@ -38,22 +38,19 @@ public sealed class WordList : Dictionary<string, HashSet<string>>
   {
     var retVal = new HashSet<string>();
 
-    // fast key = list of unique letters in anagram
-    var fkey = anagram.FastKey();
-
     foreach (var key in Keys)
     {
-      // each letter of word must be in anagram
-      var containsAll = key.All(ch => fkey.Contains(ch));
-      if (!containsAll)
+      // each letter of word must be in anagram 
+      var words = this[key];
+      foreach (var word in words)
       {
-        continue;
+        if (anagram.ContainsWord(word))
+        {
+          retVal.Add(word);
+        }
       }
-
-      var thisCandidates = this[key];
-      retVal.UnionWith(thisCandidates);
     }
 
-    return retVal.Where(anagram.Contains).ToHashSet();
+    return retVal;
   }
 }

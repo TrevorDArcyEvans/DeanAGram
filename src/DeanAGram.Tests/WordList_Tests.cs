@@ -41,7 +41,7 @@ public sealed class WordList_Tests
   {
     const string word1 = "edcba";
     const string word2 = "edcbaedcba";
-    
+
     var words = new WordList { word1, word2 };
 
     words.Contains(word1).ShouldBeTrue();
@@ -55,7 +55,7 @@ public sealed class WordList_Tests
     const string word2 = "ba";
     const string word3 = "dcb";
     const string anagram = "edcbaedcba";
-    
+
     var words = new WordList { word1, word2, word3 };
 
     words.GetCandidates(anagram).Contains(word1).ShouldBeTrue();
@@ -70,7 +70,7 @@ public sealed class WordList_Tests
     const string word2 = "ba";
     const string word3 = "zzz";
     const string anagram = "zxvnmjkl";
-    
+
     var words = new WordList { word1, word2, word3 };
     var candidates = words.GetCandidates(anagram);
 
@@ -86,10 +86,32 @@ public sealed class WordList_Tests
     const string word2 = "ba";
     const string word3 = "dcb";
     const string anagram = "a";
-    
+
     var words = new WordList { word1, word2, word3 };
     var candidates = words.GetCandidates(anagram);
 
     candidates.ShouldBeEmpty();
+  }
+
+  [Test]
+  public void GetCandidates_Voldemort()
+  {
+    var words = new WordList
+    {
+      "I".ToLowerInvariant(),
+      "am".ToLowerInvariant(),
+      "Lord".ToLowerInvariant(),
+      "Lot".ToLowerInvariant(),
+      "Voldemort".ToLowerInvariant(),
+      "mail".ToLowerInvariant(),
+      "to".ToLowerInvariant(),
+      "a".ToLowerInvariant(),
+      "or".ToLowerInvariant()
+    };
+
+    var anagram = "Tom Marvolo Lot Riddle".ToLowerInvariant().RemoveWhitespace();
+    var candidates = words.GetCandidates(anagram);
+
+    candidates.Count.ShouldBe(words.Keys.Count);
   }
 }
