@@ -2,8 +2,9 @@
 
 According to [Wikipedia](https://en.wikipedia.org/wiki/Anagram):
 
-    "An anagram is a word or phrase formed by rearranging the letters of a different word or phrase,
-    typically using all the original letters exactly once."
+    "An anagram is a word or phrase formed by rearranging the letters of a
+    different word or phrase, typically using all the original letters exactly
+    once."
 
 ## Examples
 
