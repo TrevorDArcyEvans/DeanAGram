@@ -55,5 +55,11 @@ public sealed class Solver(WordList _wordList)
       var otherSoln = new List<string>(thisSoln);
       ProcessCandidate(retval, otherSoln, otherCandidate, remainder);
     }
+
+    if (candidates.Count == 0)
+    {
+      // this is not a solution, so recover memory
+      thisSoln = null;
+    }
   }
 }
