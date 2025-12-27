@@ -122,8 +122,16 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/Anagram):
 
 ## Prerequisites
 
+<details>
+
+### Required
 * git
 * Dotnet Core 9 or higher
+
+### Optional
+* [DrawIO](https://www.drawio.com/) (for updating diagrams)
+
+</details>
 
 ## Getting started
 
@@ -203,6 +211,137 @@ smoked salmon
 
 * [English words](https://github.com/dwyl/english-words.git)
 * [Top English word lists](https://github.com/david47k/top-english-wordlists.git)
+
+## Discussion
+
+<details>
+    <summary>Sample output</summary>
+
+```bash
+$ ./DeanAGram.CLI test.json smokedsalmon
+Processing:
+  test.json
+  "smokedsalmon"
+
+  and look m me s s 
+  and look m me ss 
+  and em look m s s 
+  and em look m ss 
+  and look mme s s 
+  and look mme ss 
+  and look m m s se 
+  and look mm s se 
+  and es look m m s 
+  and es look mm s 
+  and look m m ses 
+  and look mm ses 
+  dna look m me s s 
+  dna look m me ss 
+  dna em look m s s 
+  dna em look m ss 
+  dna look mme s s 
+  dna look mme ss 
+  dna look m m s se 
+  dna look mm s se 
+  dna es look m m s 
+  dna es look mm s 
+  dna look m m ses 
+  dna look mm ses 
+  dan look m me s s 
+  dan look m me ss 
+  dan em look m s s 
+  dan em look m ss 
+  dan look mme s s 
+  dan look mme ss 
+  dan look m m s se 
+  dan look mm s se 
+  dan es look m m s 
+  dan es look mm s 
+  dan look m m ses 
+  dan look mm ses 
+  a end look m m s s 
+  a end look mm s s 
+  a den look m m s s 
+  a den look mm s s 
+  a edn look m m s s 
+  a edn look mm s s 
+  a look m m ned s s 
+  a look mm ned s s 
+  a end look m m ss 
+  a end look mm ss 
+  a den look m m ss 
+  a den look mm ss 
+  a edn look m m ss 
+  a edn look mm ss 
+  a look m m ned ss 
+  a look mm ned ss 
+  as end look m m s 
+  as end look mm s 
+  as den look m m s 
+  as den look mm s 
+  as edn look m m s 
+  as edn look mm s 
+  as look m m ned s 
+  as look mm ned s 
+  ass end look m m 
+  ass end look mm 
+  ass den look m m 
+  ass den look mm 
+  ass edn look m m 
+  ass edn look mm 
+  ass look m m ned 
+  ass look mm ned 
+  an de look m m s s 
+  an de look mm s s 
+  an ed look m m s s 
+  an ed look mm s s 
+  an de look m m ss 
+  an de look mm ss 
+  an ed look m m ss 
+  an ed look mm ss 
+  de look m m na s s 
+  de look mm na s s 
+  ed look m m na s s 
+  ed look mm na s s 
+  de look m m na ss 
+  de look mm na ss 
+  ed look m m na ss 
+  ed look mm na ss 
+  de look m man s s 
+  ed look m man s s 
+  de look m nam s s 
+  ed look m nam s s 
+  de look m man ss 
+  ed look m man ss 
+  de look m nam ss 
+  ed look m nam ss 
+  salmon smoked 
+Found 93 solutions in 7381 ms
+```
+
+</details>
+
+<details>
+
+The sample output was from a small wordlist of ~5000 words.  As may be seen, there are a lot
+of 'spurious words' eg
+* m
+* mm
+* s
+* ss
+* ned
+* de
+* ed
+* edn
+* es
+* em
+etc
+
+AFAIK, these 'words' are not in common, or even any, usage.  This has the effect of generating
+a great many extra 'paths' which lead to no solutions.  This greatly increases runtime and
+memory consumption.  The fix is to 'curate' the word lists by removing these non-words.
+
+</details>
 
 ## Further work
 * Performance!  Performance!  Performance!
